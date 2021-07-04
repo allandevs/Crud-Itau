@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { global} from './global'
+import { global } from './global';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BaseService {
   header = new HttpHeaders();
-  constructor(public http : HttpClient) { }
+  constructor(public http: HttpClient) {}
 
   get(route: string): Observable<any> {
     return this.http.get(global.BASE_API_URL + route, {
@@ -20,18 +20,23 @@ export class BaseService {
       headers: this.header,
     });
   }
-  
+
   update(route: string, obj: any): Observable<any> {
-    this.header = this.header.set('Content-Type', 'application/json; charset=utf-8');
+    this.header = this.header.set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
     return this.http.put(global.BASE_API_URL + route, obj, {
       headers: this.header,
     });
   }
-  
-  
+
   delete(route: string): Observable<any> {
-    this.header = this.header.set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.delete( global.BASE_API_URL + route, {
+    this.header = this.header.set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+    return this.http.delete(global.BASE_API_URL + route, {
       headers: this.header,
     });
   }
@@ -41,5 +46,4 @@ export class BaseService {
       headers: this.header,
     });
   }
-
 }
