@@ -1,0 +1,104 @@
+<app-loading [loading1]="true" *ngIf="loading"></app-loading>
+<section class="mt-3">
+  <h2 class="mb-3">Lista dos clientes cadastrados</h2>
+  <table class="table table-striped responsive-table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Agência / Conta</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Ferramentas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client?.name }}</td>
+        <td>{{ client?.agencia }} / {{ client?.conta }}</td>
+        <td>{{ client?.cpf }}</td>
+        <td>
+          <div class="btn-ferramentas">
+            <button
+              data-toggle="tooltip"
+              title="Editar cliente"
+              type="button"
+              routerLink="/clients/update/{{ client?.personId }}"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+            data-toggle="tooltip"
+            title="Excluir cliente"
+              type="button"
+              routerLink="/clients/delete/{{ client?.personId }}"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button
+            data-toggle="tooltip"
+            title="Detalhes do cliente"
+              type="button"
+              data-toggle="modal"
+              (click)="openModal(client?.personId)"
+            >
+              <i class="fas fa-info-circle"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="clients.length == 0 && !loading" class="text-center mt-5">
+    <h3>Nenhum cliente cadastrado até o momento!</h3>
+  </div>
+</section>
+
+<modal #myModal>
+  <modal-content>
+    <app-loading
+      style="display: flex; justify-content: center"
+      [loading2]="true"
+      *ngIf="loadingDetailClient"
+    ></app-loading>
+    <ng-container *ngIf="!loadingDetailClient">
+      <div class="text-center h3 mb-3">Detalhes do cliente</div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Nome: </label>
+        <span> {{ detailClient?.name }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">CPF: </label>
+        <span> {{ detailClient?.cpf }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Telefone:</label>
+        <span> {{ detailClient?.telefone }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Email:</label>
+        <span> {{ detailClient?.email }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Agência:</label>
+        <span> {{ detailClient?.agencia }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Conta:</label>
+        <span> {{ detailClient?.conta }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Cep:</label>
+        <span> {{ detailClient?.address?.pinCode }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Endereço:</label>
+        <span> {{ detailClient?.address?.logradouro }} </span>
+      </div>
+      <div class="mb-2">
+        <label class="font-weight-bold">Cidade:</label>
+        <span>
+          {{ detailClient?.address?.city }} - {{ detailClient?.address?.state }}
+        </span>
+      </div>
+    </ng-container>
+  </modal-content>
+</modal>

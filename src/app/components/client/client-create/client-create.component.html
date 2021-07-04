@@ -1,0 +1,155 @@
+<section class="container mt-3 mb-5">
+  <h3>Cadastrar cliente</h3>
+  <form [formGroup]="registration" *ngIf="registration">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Nome Completo</label>
+        <input
+          required
+          type="text"
+          class="form-control"
+          id="inputEmail4"
+          formControlName="name"
+          placeholder=""
+        />
+    </div>
+      <div class="form-group col-md-2">
+        <label for="data">Data de Nascimento</label>
+        <input
+          required
+          type="text"
+          class="form-control"
+          formControlName="dataNascimento"
+          id="data"
+          [textMask]="{ mask: maskDate }"
+          placeholder=""
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="cpf">CPF</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cpf"
+          formControlName="cpf"
+          [textMask]="{ mask: maskCpf }"
+          placeholder=""
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="tel">Telefone</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="telefone"
+          id="tel"
+          [textMask]="{ mask: maskTel }"
+          placeholder=""
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputEmail4"
+          formControlName="email"
+          placeholder=""
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputCEP">CEP</label>
+        <input
+          type="text"
+          [(ngModel)]="pinCode"
+          [ngModelOptions]="{ standalone: true }"
+          [textMask]="{ mask: maskPinCode }"
+          (focusout)="searchCep(pinCode)"
+          class="form-control"
+          id="inputCEP"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputAddress">Endereço</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="logradouro"
+          [ngModelOptions]="{ standalone: true }"
+          id="inputAddress"
+          placeholder="Rua dos Bobos, nº 0"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputCity">Cidade</label>
+        <input
+          type="text"
+          [(ngModel)]="city"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+          id="inputCity"
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputEstado">Estado</label>
+        <select
+          id="inputEstado"
+          [(ngModel)]="state"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control"
+        >
+          <option [ngValue]="' '" hidden>Selecione...</option>
+          <option>RJ</option>
+          <option>SP</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="agencia">Agência</label>
+        <input
+          type="text"
+          class="form-control"
+          id="agencia"
+          formControlName="agencia"
+          [textMask]="{ mask: maskAgency }"
+          placeholder=""
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="conta">Conta</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="conta"
+          id="conta"
+          [textMask]="{ mask: maskAccount }"
+          placeholder=""
+        />
+      </div>
+    </div>
+    <button
+      [disabled]="loadingRegistration "
+      type="submit"
+      class="btn btn-primary mr-3"
+      (click)="registrationClient()"
+    >
+    <span *ngIf="!loadingRegistration">
+      <i class="fas fa-user-plus mr-1"></i>
+      Cadastrar
+    </span>
+    <app-loading [loading2]="true" *ngIf="loadingRegistration"></app-loading>
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="cancelar()">
+      Cancelar
+    </button>
+  </form>
+</section>

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+@import "~ngx-toastr/toastr";
+@import "~ngx-toastr/toastr-bs4-alert";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~ngx-toastr/toastr-bs4-alert";
+@media (max-width: 768px) {
+  .responsive-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.toast-success {
+  background-color: #5cb85c !important;
+}
+
+.toast-warning {
+  background-color: #d9534f !important;
+}
